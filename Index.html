@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Hello World</title>
+  <script src="https://unpkg.com/vue"></script>
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body>
+  <div id="app">
+    <header>
+      <h1>Welcome to {{sitename}}!</h1>
+    </header>
+    <main>
+      <div class="row">
+        <div class="col">
+          <figure>
+            <img v-bind:src="product.image">
+          </figure>
+        </div>
+        <div class="col col-expand">
+          <h1 v-text="product.title"></h1>
+          <p v-html="product.description">
+          </p>
+          <p>
+            {{product.price|formatPrice}}
+          </p>
+        </div>
+      </div>
+      <div class="dropbox">
+        <input type="file" accept="image/*" class="input-file">
+        <p v-if="isInitial">
+          Drag your file(s) here to begin<br> or click to browse
+        </p>
+        <p v-if="isSaving">
+          Uploading {{ fileCount }} files...
+        </p>
+      </div>
+    </main>
+
+  </div>
+  <script type="text/javascript">
+    var webstore = new Vue({
+      el: '#app',
+      data: {
+        sitename: 'Pete Depot',
+        product: {
+          id: 1001,
+          title: "Cat Food, 25lb bag",
+          description: "A 25 pound bag of <em>irresistible</em>, " +
+            "organic goodness for your cat.",
+          price: 2000,
+          image: "https://via.placeholder.com/150.png/FF0000/FFFFFF?text=catfood"
+        }
+      },
+      filters: {
+        formatPrice: function(price) {
+          //console.log("Pete");
+          return "$" + price / 100;
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
